@@ -7,16 +7,16 @@ package com.yesdata.RESP_intepreter;
  * @author yuanaiqing
  *
  */
-public class SimpleStringNode extends AbstractRespNode {
+public class IntegerNode extends AbstractRespNode {
 	
-	private String value;
+	private Integer value;
 	
-	public SimpleStringNode(String value){
+	public IntegerNode(Integer value){
 		this.value = value;
 	}
 	
 	public RESP_DATA_TYPE getItemType(){
-		return RESP_DATA_TYPE.SIMPLE_STRING;
+		return RESP_DATA_TYPE.INTEGER;
 	}
 	
 	public void print(){
@@ -24,7 +24,6 @@ public class SimpleStringNode extends AbstractRespNode {
 	}
 	
 	public String toRespFormatString(){
-		return ConstStrings.PLUS_SIMBOL + this.value + ConstStrings.CRLF;
+		return ConstStrings.COLON_SIMBOL + this.value.toString() + ConstStrings.CRLF;
 	}
-	
 }

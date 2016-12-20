@@ -1,9 +1,8 @@
 package com.yesdata.RESP_intepreter;
 
-import java.util.Iterator;
-
 public interface IRespNode{
-	String	getItemType();
-	void setItemType();
+	RESP_DATA_TYPE getItemType();
 	void print();
+	String toRespFormatString();
+	//RespResponseInterpretedResult InterpretResponse(String response) throws Exception;
 }
