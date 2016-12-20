@@ -4,7 +4,7 @@
 
   <groupId>com.yesdata</groupId>
   <artifactId>dudu-RESP-interpreter</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>dudu-RESP-interpreter</name>

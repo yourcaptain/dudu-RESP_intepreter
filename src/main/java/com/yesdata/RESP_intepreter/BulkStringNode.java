@@ -30,4 +30,9 @@ public class BulkStringNode extends AbstractRespNode {
 				+ (this.value == null ? "" : this.value.toString())
 				+ (this.value == null ? "" : ConstStrings.CRLF);
 	}
+	
+	public String toConsoleFormatString(){
+		return (this.value == null ? "" : this.value.toString())
+				+ (this.value == null ? "" : ConstStrings.CRLF);
+	}
 }

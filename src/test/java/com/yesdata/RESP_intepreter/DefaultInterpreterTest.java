@@ -68,7 +68,7 @@ public class DefaultInterpreterTest extends TestCase {
     		ex.printStackTrace();
     	}
 
-    	assertEquals("*2\r\n$4\r\nINFO\r\n$4\r\nINFO\r\n", command);
+    	assertEquals("*1\r\n$4\r\nINFO\r\n*1\r\n$4\r\nINFO\r\n", command);
     }
     
     public void testIntepretResponseOfSingleSimpleString() {

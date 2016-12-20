@@ -27,4 +27,8 @@ public class SimpleStringNode extends AbstractRespNode {
 		return ConstStrings.PLUS_SIMBOL + this.value + ConstStrings.CRLF;
 	}
 	
+	public String toConsoleFormatString(){
+		return this.value + ConstStrings.CRLF;
+	}
+	
 }

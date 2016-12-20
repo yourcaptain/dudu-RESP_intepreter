@@ -14,20 +14,8 @@ public class ArrayNode extends AbstractRespNode {
 	
 	private List<IRespNode> value;
 	
-	public ArrayNode(){
-		this.value = new ArrayList<IRespNode>();
-	}
-	
 	public ArrayNode(List<IRespNode> value){
 		this.value = value;
-	}
-	
-	public void AddItem(IRespNode value){
-		this.value.add(value);
-	}
-	
-	public List<IRespNode> GetAllItems() {
-		return this.value;
 	}
 	
 	public RESP_DATA_TYPE getItemType(){
@@ -49,5 +37,15 @@ public class ArrayNode extends AbstractRespNode {
 				+ (this.value == null ? String.valueOf(-1) : this.value.size())
 				+ ConstStrings.CRLF
 				+ body;
+	}
+	
+	public String toConsoleFormatString(){
+		String body = "";
+		if (this.value != null) {
+			for (IRespNode respNode : this.value) {
+				body += respNode.toConsoleFormatString();
+			}
+		}
+		return body;
 	}
 }

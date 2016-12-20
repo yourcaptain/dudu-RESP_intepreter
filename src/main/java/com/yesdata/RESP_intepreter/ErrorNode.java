@@ -26,4 +26,8 @@ public class ErrorNode extends AbstractRespNode {
 	public String toRespFormatString(){
 		return ConstStrings.SUBTRACT_SIMBOL + this.value + ConstStrings.CRLF;
 	}
+	
+	public String toConsoleFormatString(){
+		return this.value + ConstStrings.CRLF;
+	}
 }

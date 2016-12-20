@@ -26,4 +26,8 @@ public class IntegerNode extends AbstractRespNode {
 	public String toRespFormatString(){
 		return ConstStrings.COLON_SIMBOL + this.value.toString() + ConstStrings.CRLF;
 	}
+	
+	public String toConsoleFormatString(){
+		return this.value.toString() + ConstStrings.CRLF;
+	}
 }

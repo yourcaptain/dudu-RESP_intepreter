@@ -7,6 +7,6 @@ public abstract class AbstractRespNode implements IRespNode{
 	
 	public abstract String toRespFormatString();
 	
-	//public abstract RespResponseInterpretedResult InterpretResponse(String response) throws Exception;
+	public abstract String toConsoleFormatString();
 	
 }
