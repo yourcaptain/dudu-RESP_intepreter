@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultRespIntepreter implements IIntepreter{
-	public String FormatCommand(String command) throws Exception {
+	public String FormatCommand(String commandString) throws Exception {
 		try {
-			IRespNode node = new BulkStringNode(command);
-			return ConstStrings.ASTERISK_SIMBOL
-					+ 1
-					+ ConstStrings.CRLF
-					+ node.toRespFormatString();
+			if (commandString.trim().length() == 0) {
+				throw new Exception("Command string should not be blank.");
+			}
+			
+			String[] commands = commandString.split(" ");
+			List<IRespNode> respNodes = new ArrayList<IRespNode>();
+			for (String command : commands) {
+				if (command.trim().length() > 0) {
+					IRespNode node = new BulkStringNode(command);
+					respNodes.add(node);
+				}
+			}
+			
+			IRespNode resultNode = new ArrayNode(respNodes);
+			return resultNode.toRespFormatString();
 		}
 		catch(Exception ex) {
 			throw ex;

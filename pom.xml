@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.yesdata</groupId>
-  <artifactId>RESP-intepreter</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>dudu-RESP-intepreter</artifactId>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
-  <name>RESP-intepreter</name>
+  <name>dudu-RESP-intepreter</name>
   <url>http://maven.apache.org</url>
 
   <properties>
