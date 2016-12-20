@@ -16,7 +16,7 @@ import junit.framework.TestSuite;
  */
 public class DefaultInterpreterTest extends TestCase {
 
-	IIntepreter defaultInterpreter = null;
+	IInterpreter defaultInterpreter = null;
 	/**
 	 * @param name
 	 */
@@ -38,7 +38,7 @@ public class DefaultInterpreterTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		defaultInterpreter = new DefaultRespIntepreter();
+		defaultInterpreter = new DefaultRespInterpreter();
 	}
     
 	

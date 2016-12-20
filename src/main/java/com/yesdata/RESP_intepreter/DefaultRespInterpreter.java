@@ -3,7 +3,7 @@ package com.yesdata.RESP_intepreter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultRespIntepreter implements IIntepreter{
+public class DefaultRespInterpreter implements IInterpreter{
 	public String FormatCommand(String commandString) throws Exception {
 		try {
 			if (commandString.trim().length() == 0) {
@@ -31,14 +31,10 @@ public class DefaultRespIntepreter implements IIntepreter{
 		try {
 			String commandString = "";
 			for (String command : commands ) {
-				IRespNode node = new BulkStringNode(command);
-				commandString += node.toRespFormatString();
+				commandString += FormatCommand(command);
 			}
 			
-			return ConstStrings.ASTERISK_SIMBOL
-					+ commands.size()
-					+ ConstStrings.CRLF
-					+ commandString;
+			return commandString;
 		}
 		catch(Exception ex) {
 			throw ex;
