@@ -200,6 +200,10 @@ public class DefaultRespIntepreter implements IIntepreter{
 			
 			int crlfIndex = response.indexOf(ConstStrings.CRLF, beginIndex);
 			String sizeStr = response.substring(beginIndex + 1, crlfIndex);
+			if (sizeStr.length() == 0) {
+				throw new Exception("The size part of Bulk String should not be blank.");
+			}
+			
 			//Null
 			if (sizeStr.equals("-1")){
 				//Construct return value
@@ -212,27 +216,48 @@ public class DefaultRespIntepreter implements IIntepreter{
 				return respResponseInterpretedResult;
 			}
 			
-			//Empty or others
-			int nextCrlfBeginIndex = crlfIndex + ConstStrings.CRLF.length();
-			int crlfIndex2 = response.indexOf(ConstStrings.CRLF, nextCrlfBeginIndex);
-			String body = response.substring(nextCrlfBeginIndex, crlfIndex2);
+			//Empty
+//			if (sizeStr.equals("0")){
+//				//Construct return value
+//				RespResponseInterpretedResult respResponseInterpretedResult = new RespResponseInterpretedResult();
+//				IRespNode respNode = new BulkStringNode("");
+//				int lastIndex = crlfIndex + ConstStrings.CRLF.length();
+//				respResponseInterpretedResult.setRespNode(respNode);
+//				respResponseInterpretedResult.setLastIndex(lastIndex);
+//				
+//				return respResponseInterpretedResult;
+//			}
 			
-			if (sizeStr.length() == 0) {
-				throw new Exception("The size part of Bulk String should not be blank.");
+			//
+			int size = -1;
+			try {
+				size = Integer.valueOf(sizeStr);
+			}
+			catch(Exception ex) {
+				throw new Exception("The size part of Bulk String should not be Integer number.");
+			}
+			int expectedBodyEndPosition = crlfIndex  + ConstStrings.CRLF.length() + size;
+			int expectedBodyEndWithCRLFPosition = crlfIndex  + ConstStrings.CRLF.length() + size + ConstStrings.CRLF.length();
+			
+			if (response.length() < expectedBodyEndWithCRLFPosition) {
+				throw new Exception("The response string length is short than bulk string size.");
 			}
 			
-			if (!sizeStr.equals("0") && body.length() == 0) {
-				throw new Exception("Bulk String body should not be blank.");
+			int nextCrlfBeginIndex = crlfIndex + ConstStrings.CRLF.length();
+			String body = response.substring(nextCrlfBeginIndex, expectedBodyEndPosition);
+			
+			if (size > 0 && body.length() == 0) {
+				throw new Exception("Bulk String body should not be blank while the size is defined as " + sizeStr + ".");
 			}
 			
 			if (!String.valueOf(body.length()).equals(sizeStr)) {
-				throw new Exception("The size part of Bulk String do not quals to the body's size.");
+				throw new Exception("The size part (" + sizeStr + ") of Bulk String do not quals to the body's size(" + String.valueOf(body.length()) + ").");
 			}
 			
 			//Construct return value
 			RespResponseInterpretedResult respResponseInterpretedResult = new RespResponseInterpretedResult();
 			IRespNode respNode = new BulkStringNode(body);
-			int lastIndex = crlfIndex2 + ConstStrings.CRLF.length();
+			int lastIndex = expectedBodyEndWithCRLFPosition;
 			respResponseInterpretedResult.setRespNode(respNode);
 			respResponseInterpretedResult.setLastIndex(lastIndex);
 			
