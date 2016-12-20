@@ -1,4 +1,4 @@
-package com.yesdata.RESP_intepreter;
+package net.yesdata.RESP_intepreter;
 
 public class ConstStrings {
 	public static final String CRLF = "\r\n";
