@@ -2,7 +2,11 @@
 REdis Serialization Protocol (RESP) implemented in java.
 You can simply construct string commands to RESP commands, and interpret redis response.
 
-By import com.yesdata.RESP_intepreter.* you can play with RESP with happy.
+By 
+```
+import net.yesdata.RESP_intepreter.* 
+```
+you can play with RESP with happy.
 
 #How to format command string to RESP style?#
 ```
