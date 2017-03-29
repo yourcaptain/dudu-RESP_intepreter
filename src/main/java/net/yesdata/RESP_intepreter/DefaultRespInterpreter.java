@@ -3,30 +3,25 @@ package net.yesdata.RESP_intepreter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultRespInterpreter implements IInterpreter{
-	public String FormatCommand(String commandString) throws Exception {
-		try {
-			if (commandString.trim().length() == 0) {
-				throw new Exception("Command string should not be blank.");
-			}
-			
-			String[] commands = commandString.split(" ");
-			List<IRespNode> respNodes = new ArrayList<IRespNode>();
-			for (String command : commands) {
-				if (command.trim().length() > 0) {
-					IRespNode node = new BulkStringNode(command);
-					respNodes.add(node);
-				}
-			}
-			
-			IRespNode resultNode = new ArrayNode(respNodes);
-			return resultNode.toRespFormatString();
+public class DefaultRespInterpreter implements IInterpreter {
+	public String FormatCommand(String commandString) {
+		if (commandString.trim().length() == 0) {
+			throw new IllegalArgumentException("Command string should not be blank.");
 		}
-		catch(Exception ex) {
-			throw ex;
+
+		String[] commands = commandString.split(" ");
+		List<IRespNode> respNodes = new ArrayList<IRespNode>();
+		for (String command : commands) {
+			if (command.trim().length() > 0) {
+				IRespNode node = new BulkStringNode(command);
+				respNodes.add(node);
+			}
 		}
+
+		IRespNode resultNode = new ArrayNode(respNodes);
+		return resultNode.toRespFormatString();
 	}
-	
+
 	public String FormatCommand(List<String> commands) throws Exception {
 		try {
 			String commandString = "";
